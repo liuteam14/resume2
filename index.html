@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人主页</title>
+    <!-- 引入具有科技感的 Inter 字体与 Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- 引入 Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 引入 AOS 滚动动画库 -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* 亮色模式（默认）科技感配色 */
+        :root {
+            --primary-color: #1a365d; 
+            --secondary-color: #00b4d8; 
+            --accent-color: #0077b6; 
+            --text-color: #334155;
+            --dark-color: #0f172a;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --card-inner-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* 暗黑模式适配 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #38bdf8;
+                --secondary-color: #0ea5e9;
+                --accent-color: #0284c7;
+                --text-color: #cbd5e1;
+                --dark-color: #f8fafc;
+                --bg-color: #0f172a;
+                --card-bg: #1e293b;
+                --card-inner-bg: #334155;
+                --border-color: #475569;
+                --shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            }
+        }
+        
+        body {
+            font-family: 'Inter', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.7;
+            letter-spacing: 0.5px;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            scroll-behavior: smooth;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        /* 简单的网格背景增加科技感 */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.4;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        nav {
+            background: var(--card-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        nav ul {
+            padding: 0;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+        
+        nav li {
+            padding: 18px 25px;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        nav li::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        nav li:hover::after {
+            width: 70%;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+        
+        section {
+            padding: 40px;
+            background: var(--card-bg);
+            margin: 30px 0;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        
+        section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+        
+        section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            background: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+        }
+        
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: var(--transition);
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+            border-color: var(--secondary-color);
+        }
+        
+        h1, h2, h3 {
+            color: var(--dark-color);
+            margin-top: 0;
+        }
+        
+        h1 {
+            margin: 20px 0 10px;
+            font-size: 2.8em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: white;
+        }
+        
+        h2 {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+            display: inline-block;
+            font-size: 1.8em;
+            position: relative;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 40%;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        h2 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .intro-text {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 18px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+            font-size: 0.95em;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .contact-icon {
+            margin-right: 8px;
+            color: var(--secondary-color);
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .skill-category {
+            background: var(--card-inner-bg);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: var(--secondary-color);
+        }
+        
+        .skill-category h3 i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .skill-category ul {
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .skill-category li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.95em;
+        }
+        
+        .skill-category li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .project {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+        
+        .project:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .project h3 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .project h3::before {
+            content: "";
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-top: 30px;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--card-inner-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -31px;
+            top: 25px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            border: 3px solid var(--card-bg);
+        }
+        
+        .timeline-date {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: inline-block;
+            font-size: 0.9em;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--card-inner-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            font-size: 1.1em;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        
+        .badge {
+            background: var(--card-inner-bg);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85em;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        
+        .badge:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .badge:hover i {
+            color: white !important;
+        }
+        
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul {
+            margin-bottom: 15px;
+        }
+        
+        strong {
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container { width: 95%; padding: 0 10px; }
+            nav ul { flex-direction: column; align-items: center; }
+            nav li { padding: 12px; width: 100%; text-align: center; }
+            .skills-container { grid-template-columns: 1fr; }
+            .contact-info { flex-direction: column; gap: 15px; align-items: center; }
+        }
+        
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="profile.jpg" alt="awei的个人头像" class="profile-img">
+            <h1>awei</h1>
+            <p class="intro-text">半导体光电器件研究者 | 神经形态计算探索者 | 电子工程师</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-graduation-cap contact-icon"></i>
+                    <span style="color: white;">安徽大学 | 新一代电子信息技术</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt contact-icon"></i>
+                    <span style="color: white;">中国 | 合肥</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about"><i class="fas fa-user"></i> 关于我</a></li>
+            <li><a href="#education"><i class="fas fa-graduation-cap"></i> 教育背景</a></li>
+            <li><a href="#skills"><i class="fas fa-code"></i> 专业技能</a></li>
+            <li><a href="#experience"><i class="fas fa-microchip"></i> 项目经验</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> 联系方式</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="about" data-aos="fade-up">
+            <h2><i class="fas fa-user"></i> 关于我</h2>
+            <p>您好！我是awei，目前是<strong>安徽大学</strong>新一代电子信息技术专业的在读硕士研究生，研究方向聚焦于<strong>新型半导体光电突触器件与神经形态计算</strong>。得益于本科阶段扎实的电子信息硬件基础，我能够游刃有余地将底层的半导体器件物理与顶层的AI神经网络算法相结合，对“感存算一体化”的前沿交叉领域充满探索热情。</p>
+            
+            <p>在学术研究与课程学习中，我始终保持严谨求实的态度。研究生阶段取得了 <strong>3.82</strong> 的优异学分绩点，并深入钻研了高等半导体材料与器件物理等核心课程。在专注微纳加工与光电测试之余，我担任了党支部党小组组长，结合本科阶段丰富的学生干部经验，这培养了我出色的统筹协调能力与团队协作精神，能够高效推进实验室课题的进展。</p>
+            
+            <p>我性格细致耐心、具备极强的抗压与试错能力（这是半导体工艺与器件流片过程中不可或缺的品质），且始终保持对硬核科技创新的学习驱动力。未来，我期望能在<strong>半导体集成电路、先进光电器件或AI硬件加速（类脑芯片）</strong>等领域深耕，致力于将前沿的器件物理机理转化为有价值的产业落地应用。</p>
+            
+            <div class="badges">
+                <span class="badge"><i class="fas fa-star" style="color: #e74c3c;"></i> 中共党员</span>
+                <span class="badge"><i class="fas fa-microchip" style="color: var(--secondary-color);"></i> 跨学科背景 (器件+算法)</span>
+                <span class="badge"><i class="fas fa-chart-line" style="color: var(--secondary-color);"></i> 硕士绩点 3.82</span>
+                <span class="badge"><i class="fas fa-award" style="color: #f1c40f;"></i> 研究生二等奖学金</span>
+                <span class="badge"><i class="fas fa-trophy" style="color: #f1c40f;"></i> 国家励志奖学金</span>
+                <span class="badge"><i class="fas fa-certificate" style="color: var(--secondary-color);"></i> 英语四级 (CET-4)</span>
+            </div>
+        </section>
+        
+        <section id="education" data-aos="fade-up">
+            <h2><i class="fas fa-graduation-cap"></i> 教育背景</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2025 - 至今</div>
+                    <h3>安徽大学 - 新一代电子信息技术专业（硕士研究生）</h3>
+                    <p><strong>学分绩点：</strong> 3.82</p>
+                    <p><strong>主修课程：</strong> 高等半导体材料与器件物理、射频与微波电路、超材料理论与技术</p>
+                    <p><strong>学生职务：</strong> 新一代电子信息技术第一党支部党小组组长</p>
+                    <p><strong>荣誉奖励：</strong> 校二等奖学金</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2021 - 2025</div>
+                    <h3>安徽农业大学 - 电子信息工程专业 (本科)</h3>
+                    <p><strong>学分绩点：</strong> 3.59</p>
+                    <p><strong>主修课程：</strong> 模拟电子技术、数字电子技术、数字信号处理、单片机原理与应用、通信原理、FPGA开发、嵌入式系统设计、人工智能基础</p>
+                    <p><strong>学生职务：</strong> 班级思政委员、院学生会干事</p>
+                    <p><strong>荣誉奖励：</strong> 国家励志奖学金、校一等奖学金、校三好学生、校优秀共青团员</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills" data-aos="fade-up">
+            <h2><i class="fas fa-code"></i> 专业技能</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-microchip"></i> 器件制备与微纳加工</h3>
+                    <ul>
+                        <li>掌握半导体薄膜沉积技术（CVD、ALD、磁控溅射、旋涂法等）</li>
+                        <li>熟悉半导体标准光刻与刻蚀工艺（RIE、ICP、湿法刻蚀等）</li>
+                        <li>具备二维材料、钙钛矿或金属氧化物等新型半导体材料的制备与转移经验</li>
+                        <li>熟练操作手套箱、匀胶机、真空蒸镀机等超净间设备</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-microscope"></i> 光电测试与材料表征</h3>
+                    <ul>
+                        <li>熟练使用半导体参数测试仪（Keithley 4200/2450、Agilent B1500等）及探针台</li>
+                        <li>能独立搭建并调节光电测试系统（多波长激光器、光功率计、示波器等）</li>
+                        <li>精通材料表征数据分析（SEM、AFM、XRD、XPS、拉曼光谱等）</li>
+                        <li>熟悉LabVIEW自动化测试编程，提升数据采集效率</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-brain"></i> 突触特性与神经形态计算</h3>
+                    <ul>
+                        <li>深入理解生物突触机制，熟练测试及分析EPSC/IPSC、PPF、STDP等突触可塑性参数</li>
+                        <li>熟悉光电感存算一体化架构及光电储池计算（Reservoir Computing）</li>
+                        <li>了解脉冲神经网络（SNN）及人工神经网络（ANN）的基础理论</li>
+                        <li>能够基于提取的器件电导权重数据，评估MNIST等图像集的识别准确率</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-line"></i> 仿真建模与数据分析</h3>
+                    <ul>
+                        <li>精通 Origin 进行专业的科研数据处理与高质量期刊图表绘制</li>
+                        <li>熟悉 TCAD (Silvaco/Sentaurus) 或 COMSOL 进行半导体器件物理仿真建模</li>
+                        <li>熟练使用 Python (NumPy/Pandas/Matplotlib) 进行批量数据处理与可视化</li>
+                        <li>掌握 PyTorch/TensorFlow 等深度学习框架进行简单的网络硬件映射仿真</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience" data-aos="fade-up">
+            <h2><i class="fas fa-briefcase"></i> 项目经验</h2>
+            
+            <div class="project" data-aos="fade-up">
+                <h3>基于 Sc₂O₃/Ga₂O₃ 异质结的耐高温深紫外自适应光电突触研究（核心课题）</h3>
+                <p><strong>时间：</strong> 2025年9月 ~ 至今</p>
+                <p><strong>关键词：</strong> 超宽禁带半导体, 异质结, 深紫外探测, 高温稳定性, 光电突触, 感存算一体</p>
+                <ul>
+                    <li><strong>器件设计与微纳加工：</strong> 设计并制备基于氧化钪/氧化镓（Sc₂O₃/Ga₂O₃）异质结的光电突触器件。熟练掌握薄膜沉积、光刻工艺以及电子束蒸发（E-beam）等微纳加工技术，实现高质量异质界面的构建与电极制备。</li>
+                    <li><strong>极端环境光电表征：</strong> 搭建并优化高温及深紫外光电测试系统，系统性探究器件在高温恶劣环境（如 200℃+）下的深紫外（DUV）光电响应特性、暗电流抑制表现及长期稳定性。</li>
+                    <li><strong>自适应突触特性研究：</strong> 模拟生物视觉系统的“视网膜”功能，成功实现并测试了 EPSC（兴奋性突触后电流）、PPF（双脉冲易化）、高通滤波以及<strong>环境光自适应</strong>等核心突触可塑性行为，并深入分析了基于界面缺陷态载流子捕获/释放的物理机理。</li>
+                    <li><strong>神经形态计算仿真：</strong> 提取真实器件在不同深紫外光激励下的电导权重更新数据，利用 Python 构建脉冲神经网络（SNN）模型，进行模式识别仿真（如极端环境下的目标特征识别），验证器件在硬件级神经形态视觉预处理中的应用潜力。</li>
+                </ul>
+            </div>
+            
+            <div class="project" data-aos="fade-up">
+                <h3>基于STM32的智能家居安防系统（毕业设计）</h3>
+                <p><strong>技术栈：</strong> STM32F103C8T6, ESP8266, OpenMV, 多传感器融合, FreeRTOS</p>
+                <ul>
+                    <li>设计并实现以STM32单片机为核心的智能安防系统，集成燃气监测、火灾预警、入侵检测及人脸识别功能</li>
+                    <li>采用多传感器数据融合技术提高系统可靠性，通过卡尔曼滤波算法优化传感器数据</li>
+                    <li>开发基于OpenMV的人脸识别模块，实现家庭成员识别功能</li>
+                    <li>通过ESP8266 WiFi模块实现远程监控，开发手机APP实时接收报警信息</li>
+                </ul>
+            </div>
+            
+            <div class="project" data-aos="fade-up">
+                <h3>STM32F407物联网网关开发（实习项目）</h3>
+                <p><strong>时间：</strong> 2024年12月 ~ 2025年1月</p>
+                <ul>
+                    <li>负责ADC高精度采样模块开发（16位精度，采样率1kHz）</li>
+                    <li>实现PWM控制模块，支持多通道精确输出</li>
+                    <li>集成ESP32 WiFi模块，开发MQTT协议通信功能</li>
+                    <li>优化网络协议栈，支持10+设备并发接入</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="contact" data-aos="fade-up">
+            <h2><i class="fas fa-envelope"></i> 联系方式</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <span><a href="mailto:908965922@qq.com">908965922@qq.com</a></span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone contact-icon"></i>
+                    <span>15055956280</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-qq contact-icon"></i>
+                    <span>QQ: 908965922</span>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://github.com/" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://weixin.qq.com/" class="social-link" title="微信"><i class="fab fa-weixin"></i></a>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px; color: var(--text-color); opacity: 0.8;">
+                <p>欢迎联系我探讨学术问题或职业机会！</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 awei的个人主页. 保留所有权利.</p>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
+                <span>最后更新: 2026年10月</span>
+                <span style="margin: 0 10px;">|</span>
+                <span>Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> in Hefei</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- 初始化 AOS 动画 -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>
