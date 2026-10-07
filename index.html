@@ -3,625 +3,616 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
+    <title>awei 的个人主页 - 电子工程师</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 科技感沉稳配色体系 */
-            --primary-color: #1a5f7a;     /* 深邃科技蓝 */
-            --secondary-color: #22a6b3;   /* 亮青色（强调色） */
-            --accent-color: #f39c12;      /* 暖橙色（点缀色） */
-            --light-color: #f8f9fa;
-            --dark-color: #1c2833;        /* 纯粹深灰蓝 */
-            --text-color: #34495e;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* 更轻盈的弥散阴影 */
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* 清新亮丽的色彩系统 */
+            --theme-color-1: #0ea5e9; /* 天空蓝 */
+            --theme-color-2: #10b981; /* 薄荷绿 */
+            --bg-color: #f8fafc;      /* 清新灰白背景 */
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-main: #334155;     /* 柔和的深岩灰 */
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --glass-shadow: 0 8px 32px 0 rgba(14, 165, 233, 0.05);
+            --hover-shadow: 0 20px 40px -10px rgba(14, 165, 233, 0.15);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
-        body {
-            font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            line-height: 1.8;
+
+        /* 炫酷的暗黑模式适配 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0f172a;
+                --card-bg: rgba(30, 41, 59, 0.8);
+                --text-main: #f8fafc;
+                --text-muted: #94a3b8;
+                --border-color: #334155;
+                --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            color: var(--text-color);
-            background-color: #f5f7fa;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            line-height: 1.8;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+            background-attachment: fixed;
             scroll-behavior: smooth;
         }
-        
+
+        /* 炫酷渐变头部 */
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
-            color: white;
-            padding: 60px 0;
-            text-align: center;
             position: relative;
+            padding: 80px 20px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--theme-color-1), var(--theme-color-2));
+            color: white;
             overflow: hidden;
-            box-shadow: var(--shadow);
         }
-        
-        /* 科技感网格背景 */
-        header::before {
-            content: "";
+
+        header::after {
+            content: '';
             position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            opacity: 0.3;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, var(--bg-color), transparent);
         }
-        
-        .container {
-            width: 85%;
-            max-width: 1200px;
-            margin: auto;
-            overflow: hidden;
-            padding: 0 20px;
-            position: relative; /* 保证内容在网格之上 */
-            z-index: 1;
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
         }
-        
+
+        .profile-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        /* 头像呼吸发光效果 */
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s ease;
+        }
+
+        .profile-wrapper:hover .profile-img {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.95;
+            margin-bottom: 25px;
+        }
+
+        .header-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .header-tag {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* 清新毛玻璃导航栏 */
         nav {
-            background: rgba(255, 255, 255, 0.95);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         }
-        
+
+        @media (prefers-color-scheme: dark) {
+            nav {
+                background: rgba(15, 23, 42, 0.7);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+        }
+
         nav ul {
-            padding: 0;
-            list-style: none;
             display: flex;
             justify-content: center;
-            margin: 0;
+            list-style: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
         }
-        
-        nav li {
-            padding: 18px 25px;
+
+        nav a {
+            display: block;
+            padding: 18px 24px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: var(--transition);
             position: relative;
+        }
+
+        nav a i {
+            margin-right: 6px;
+            color: var(--theme-color-1);
+            opacity: 0.8;
             transition: var(--transition);
         }
-        
-        nav li:hover {
-            background: rgba(34, 166, 179, 0.05); /* 配合青色的悬浮背景 */
+
+        nav a:hover {
+            color: var(--theme-color-1);
         }
-        
-        nav li::after {
-            content: "";
+
+        nav a:hover i {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        nav a::after {
+            content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 3px;
-            background: var(--secondary-color);
+            background: linear-gradient(90deg, var(--theme-color-1), var(--theme-color-2));
             transition: var(--transition);
+            border-radius: 3px 3px 0 0;
         }
-        
-        nav li:hover::after {
-            width: 70%;
+
+        nav a:hover::after {
+            width: 60%;
         }
-        
-        nav a {
-            color: var(--dark-color);
-            text-decoration: none;
-            font-weight: 600;
-            letter-spacing: 1px;
+
+        /* 朴实而精致的内容区 */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 45px;
+            margin-bottom: 40px;
+            box-shadow: var(--glass-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            transition: var(--transition);
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            section { border-color: rgba(255, 255, 255, 0.05); }
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            color: var(--text-main);
+            margin-bottom: 35px;
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        .section-title i {
+            background: linear-gradient(135deg, var(--theme-color-1), var(--theme-color-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-right: 12px;
+            font-size: 1.6rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--theme-color-1), var(--theme-color-2));
+            border-radius: 4px;
+        }
+
+        /* 徽章设计 */
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .badge {
+            background: rgba(14, 165, 233, 0.08);
+            color: var(--theme-color-1);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
             display: flex;
             align-items: center;
             gap: 8px;
-        }
-        
-        section {
-            padding: 40px;
-            background: white;
-            margin: 30px 0;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
+            border: 1px solid rgba(14, 165, 233, 0.15);
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
         }
-        
-        section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
-        }
-        
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08); /* 悬浮时阴影加深 */
-        }
-        
-        footer {
-            background: var(--dark-color);
+
+        .badge:hover {
+            background: var(--theme-color-1);
             color: white;
-            text-align: center;
-            padding: 40px 0;
-            margin-top: 60px;
+            transform: translateY(-2px);
+        }
+
+        /* 时间轴设计 */
+        .timeline {
             position: relative;
+            padding-left: 35px;
         }
-        
-        footer::before {
-            content: "";
+
+        .timeline::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--accent-color));
+            left: 5px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: var(--border-color);
         }
-        
-        .profile-img {
-            width: 180px;
-            height: 180px;
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            background: var(--theme-color-2);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
             transition: var(--transition);
         }
-        
-        .profile-img:hover {
-            transform: scale(1.05) rotate(3deg);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border-color: var(--secondary-color);
+
+        .timeline-item:hover::before {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.2);
         }
-        
-        h1, h2, h3 {
-            color: var(--dark-color);
-            margin-top: 0;
-        }
-        
-        h1 {
-            margin: 20px 0 10px;
-            font-size: 2.8em;
-            font-weight: 700;
-            letter-spacing: 1px;
-            /* 移除了老旧的文字阴影，保持科技风的干净锐利 */
-        }
-        
-        h2 {
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
+
+        .timeline-date {
             display: inline-block;
-            font-size: 1.8em;
-            position: relative;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--theme-color-2);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
         }
-        
-        h2 i {
-            margin-right: 10px;
-            color: var(--primary-color);
-        }
-        
-        h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-        
-        .intro-text {
-            font-size: 1.3em;
+
+        .timeline-item h3 {
+            font-size: 1.3rem;
+            color: var(--text-main);
             margin-bottom: 10px;
-            font-weight: 300;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
         }
-        
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin: 25px 0;
+
+        /* 技能网格区 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
-        
-        .contact-item {
+
+        .skill-card {
+            background: rgba(14, 165, 233, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            transition: var(--transition);
+        }
+
+        .skill-card:hover {
+            border-color: var(--theme-color-1);
+            background: rgba(14, 165, 233, 0.06);
+            transform: translateY(-3px);
+        }
+
+        .skill-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 10px 20px;
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
-            transition: var(--transition);
-            border: 1px solid rgba(255,255,255,0.1);
         }
-        
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            border-color: rgba(255,255,255,0.3);
-        }
-        
-        .contact-icon {
+
+        .skill-card h3 i {
+            color: var(--theme-color-1);
             margin-right: 10px;
-            color: white;
-            font-size: 1.2em;
-        }
-        
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-        
-        .skill-category {
-            background: var(--light-color);
-            padding: 25px;
+            font-size: 1.2rem;
+            background: rgba(14, 165, 233, 0.1);
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 8px;
-            border-left: 4px solid var(--secondary-color);
-            transition: var(--transition);
         }
-        
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+
+        .skill-card ul {
+            list-style: none;
+            padding: 0;
         }
-        
-        .skill-category h3 i {
-            margin-right: 10px;
-            color: var(--secondary-color);
-        }
-        
-        .skill-category ul {
-            padding-left: 20px;
-            list-style: none; /* 移除默认圆点 */
-        }
-        
-        /* 现代科技感小圆点 */
-        .skill-category li {
-            margin-bottom: 8px;
+
+        .skill-card li {
             position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
         }
-        
-        .skill-category li::before {
-            content: "";
-            width: 6px;
-            height: 6px;
-            background: var(--secondary-color);
-            border-radius: 50%;
+
+        .skill-card li::before {
+            content: "•";
             position: absolute;
-            left: -18px;
-            top: 10px;
+            left: 0;
+            color: var(--theme-color-2);
+            font-size: 1.2rem;
+            line-height: 1;
         }
-        
+
+        /* 项目经验区 */
         .project {
-            margin-bottom: 35px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid rgba(0,0,0,0.05); /* 更柔和的实线分割 */
-            transition: var(--transition);
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 30px;
         }
-        
-        .project:hover {
-            border-bottom-color: var(--secondary-color);
-        }
-        
+
         .project:last-child {
             border-bottom: none;
             margin-bottom: 0;
             padding-bottom: 0;
         }
-        
+
         .project h3 {
-            color: var(--dark-color);
+            font-size: 1.3rem;
+            color: var(--text-main);
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .project h3::before {
-            content: "";
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background: var(--secondary-color);
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        
-        .timeline {
             position: relative;
-            padding-left: 40px;
-            margin-top: 30px;
-        }
-        
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 10px;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: var(--light-color);
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
-        }
-        
-        /* 优化时间轴圆点的光晕效果 */
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: -38px;
-            top: 25px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--secondary-color);
-            border: 3px solid white;
-            box-shadow: 0 0 0 4px rgba(34, 166, 179, 0.2); 
-        }
-        
-        .timeline-date {
-            color: var(--secondary-color);
-            font-weight: bold;
-            margin-bottom: 5px;
             display: inline-block;
-            padding: 3px 12px;
-            background: rgba(34, 166, 179, 0.1);
-            border-radius: 20px;
-            font-size: 0.9em;
         }
         
-        .social-links {
-            display: flex;
-            justify-content: center;
+        .project h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(14, 165, 233, 0.15);
+            z-index: -1;
+            transition: var(--transition);
+        }
+
+        .project:hover h3::after {
+            height: 100%;
+        }
+
+        .project-meta {
+            font-size: 0.9rem;
+            color: var(--theme-color-2);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .project ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .project li {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        .project li::before {
+            content: "\f105"; /* FontAwesome Angle Right */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--theme-color-1);
+            opacity: 0.6;
+        }
+
+        /* 联系方式与社交 */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-top: 25px;
+            margin-bottom: 35px;
         }
-        
-        .social-link {
-            display: inline-flex;
+
+        .contact-card {
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 50%;
+            padding: 30px 20px;
+            background: rgba(14, 165, 233, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             text-align: center;
-            font-size: 1.2em;
             transition: var(--transition);
         }
-        
-        .social-link:hover {
-            background: var(--secondary-color);
-            transform: translateY(-5px) scale(1.1);
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: var(--glass-shadow);
+            border-color: var(--theme-color-1);
         }
-        
-        .badges {
+
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--theme-color-1);
+            margin-bottom: 15px;
+        }
+
+        .social-bar {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
             justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
         }
-        
-        .badge {
-            background: var(--light-color);
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-size: 0.9em;
-            color: var(--dark-color);
-            border: 1px solid rgba(0,0,0,0.05);
+
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-        }
-        
-        .badge:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-3px);
-            border-color: var(--primary-color);
-        }
-        
-        /* 给星星和特殊奖项加上强调色 */
-        .badge i.fa-star, .badge i.fa-trophy {
-            color: var(--accent-color);
-        }
-        .badge:hover i {
-            color: white;
-        }
-        
-        .badge i {
-            font-size: 1.1em;
-            color: var(--secondary-color);
-        }
-        
-        a {
-            color: var(--primary-color);
+            justify-content: center;
+            color: var(--text-main);
+            font-size: 1.2rem;
             text-decoration: none;
             transition: var(--transition);
         }
-        
-        a:hover {
-            color: var(--secondary-color);
-            text-decoration: underline;
-        }
-        
-        p {
-            margin-bottom: 15px;
-        }
-        
-        ul {
-            margin-bottom: 15px;
-        }
-        
-        strong {
-            color: var(--dark-color);
-        }
-        
-        /* 动画效果 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        section {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-        
-        section:nth-child(2) { animation-delay: 0.1s; }
-        section:nth-child(3) { animation-delay: 0.2s; }
-        section:nth-child(4) { animation-delay: 0.3s; }
-        section:nth-child(5) { animation-delay: 0.4s; }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                padding: 0 10px;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav li {
-                padding: 12px;
-                width: 100%;
-                text-align: center;
-            }
-            
-            .skills-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .profile-img {
-                width: 150px;
-                height: 150px;
-            }
-            
-            h1 {
-                font-size: 2.2em;
-            }
-            
-            section {
-                padding: 25px 20px;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .contact-item {
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            header {
-                padding: 40px 0;
-            }
-            
-            h1 {
-                font-size: 1.8em;
-            }
-            
-            .intro-text {
-                font-size: 1.1em;
-            }
-            
-            .profile-img {
-                width: 120px;
-                height: 120px;
-            }
-            
-            section {
-                margin: 20px 0;
-            }
-        }
-        
-        /* 滚动条美化 */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
+
+        .social-btn:hover {
+            background: linear-gradient(135deg, var(--theme-color-1), var(--theme-color-2));
+            color: white;
+            border-color: transparent;
+            transform: translateY(-4px) rotate(8deg);
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.3);
         }
 
-        /* 系统级暗黑模式自动适配 (Dark Mode) */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --light-color: #243447;
-                --dark-color: #f8f9fa;
-                --text-color: #cbd5e1;
-            }
-            body { 
-                background-color: #0f172a; 
-            }
-            section, nav { 
-                background-color: #1e293b; 
-                color: var(--text-color);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            }
-            h1, h2, h3, strong { 
-                color: #f1f5f9; 
-            }
-            nav a { 
-                color: #e2e8f0; 
-            }
-            .skill-category, .timeline-item, .badge { 
-                background: rgba(255,255,255,0.03); 
-                border-color: rgba(255,255,255,0.05);
-            }
-            .project {
-                border-bottom-color: rgba(255,255,255,0.05);
-            }
-            ::-webkit-scrollbar-track {
-                background: #1e293b;
-            }
+        /* 底部 */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
+
+        footer i {
+            color: #ef4444;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        /* 动画与响应式 */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--text-muted);
+        }
+
+        strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 60px 20px 40px; }
+            h1 { font-size: 2.2rem; }
+            nav a { padding: 12px 15px; font-size: 0.95rem; }
+            section { padding: 30px 20px; margin-bottom: 25px; }
+            .section-title { font-size: 1.5rem; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--theme-color-1); }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header>
-        <div class="container">
-            <img src="profile.jpg" alt="awei的个人头像" class="profile-img">
+        <div class="header-content">
+            <div class="profile-wrapper">
+                <img src="profile.jpg" alt="awei的个人头像" class="profile-img">
+            </div>
             <h1>awei</h1>
             <p class="intro-text">电子工程师 | 新型半导体光电器件研究者 | 嵌入式系统开发者 | 技术爱好者</p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-graduation-cap contact-icon"></i>
-                    <span>安徽大学 | 新一代电子信息技术</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt contact-icon"></i>
-                    <span>中国 | 合肥</span>
-                </div>
+            <div class="header-tags">
+                <div class="header-tag"><i class="fas fa-graduation-cap"></i> 安徽大学 | 新一代电子信息技术</div>
+                <div class="header-tag"><i class="fas fa-map-marker-alt"></i> 中国 | 合肥</div>
             </div>
         </div>
     </header>
@@ -630,7 +621,6 @@
         <ul>
             <li><a href="#about"><i class="fas fa-user"></i> 关于我</a></li>
             <li><a href="#education"><i class="fas fa-graduation-cap"></i> 教育背景</a></li>
-            <!-- 已替换为齿轮组图标 -->
             <li><a href="#skills"><i class="fas fa-cogs"></i> 专业技能</a></li>
             <li><a href="#experience"><i class="fas fa-briefcase"></i> 项目经验</a></li>
             <li><a href="#contact"><i class="fas fa-envelope"></i> 联系方式</a></li>
@@ -638,12 +628,12 @@
     </nav>
     
     <div class="container">
+        <!-- 关于我 -->
         <section id="about">
-            <h2><i class="fas fa-user"></i> 关于我</h2>
-            
-            <p>    您好！我是awei，目前是安徽大学新一代电子信息技术专业的在读硕士研究生，研究方向聚焦于新型半导体光电突触器件与神经形态计算。得益于本科阶段扎实的电子信息硬件基础，我拥有扎实的电子技术基础和编程能力，对物联网和智能系统开发充满热情与创新精神，我能够游刃有余地将底层的半导体器件物理与顶层的AI神经网络算法相结合，对“感存算一体化”的前沿交叉领域充满探索热情。</p>
-            <p>    在学术研究与课程学习中，我始终保持严谨求实的态度。研究生阶段取得了 3.82 的优异学分绩点，并深入钻研了高等半导体材料与器件物理等核心课程。在专注微纳加工与光电测试之余，我担任了党支部党小组组长，结合本科阶段丰富的学生干部经验，这培养了我出色的统筹协调能力与团队协作精神，能够高效推进实验室课题的进展。</p>
-            <p>    我性格细致耐心、具备极强的抗压与试错能力，且始终保持对硬核科技创新的学习驱动力。未来，我期望能在半导体集成电路、先进光电器件或AI硬件加速（类脑芯片）等领域深耕，致力于将前沿的器件物理机理转化为有价值的产业落地应用。</p>
+            <h2 class="section-title"><i class="fas fa-user"></i> 关于我</h2>
+            <p>您好！我是awei，目前是安徽大学新一代电子信息技术专业的在读硕士研究生，研究方向聚焦于新型半导体光电突触器件与神经形态计算。得益于本科阶段扎实的电子信息硬件基础，我拥有扎实的电子技术基础和编程能力，对物联网和智能系统开发充满热情与创新精神，我能够游刃有余地将底层的半导体器件物理与顶层的AI神经网络算法相结合，对“感存算一体化”的前沿交叉领域充满探索热情。</p>
+            <p>在学术研究与课程学习中，我始终保持严谨求实的态度。研究生阶段取得了 3.82 的优异学分绩点，并深入钻研了高等半导体材料与器件物理等核心课程。在专注微纳加工与光电测试之余，我担任了党支部党小组组长，结合本科阶段丰富的学生干部经验，这培养了我出色的统筹协调能力与团队协作精神，能够高效推进实验室课题的进展。</p>
+            <p>我性格细致耐心、具备极强的抗压与试错能力，且始终保持对硬核科技创新的学习驱动力。未来，我期望能在半导体集成电路、先进光电器件或AI硬件加速（类脑芯片）等领域深耕，致力于将前沿的器件物理机理转化为有价值的产业落地应用。</p>
             
             <div class="badges">
                 <span class="badge"><i class="fas fa-star"></i> 中共党员</span>
@@ -654,11 +644,12 @@
             </div>
         </section>
         
+        <!-- 教育背景 -->
         <section id="education">
-            <h2><i class="fas fa-graduation-cap"></i> 教育背景</h2>
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> 教育背景</h2>
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="timeline-date">2025 - 至今</div>
+                    <span class="timeline-date">2025 - 至今</span>
                     <h3>安徽大学 - 新一代电子信息技术专业（硕士研究生）</h3>
                     <p><strong>学分绩点：</strong> 3.82</p>
                     <p><strong>主修课程：</strong> 高等半导体材料与器件物理、射频与微波电路、超材料理论与技术</p>
@@ -667,7 +658,7 @@
                 </div>
                 
                 <div class="timeline-item">
-                    <div class="timeline-date">2021 - 2025</div>
+                    <span class="timeline-date">2021 - 2025</span>
                     <h3>安徽农业大学 - 电子信息工程专业（本科）</h3>
                     <p><strong>学分绩点：</strong> 3.59</p>
                     <p><strong>主修课程：</strong> 模拟电子技术、数字电子技术、数字信号处理、单片机原理与应用、通信原理、FPGA开发、嵌入式系统设计、人工智能基础</p>
@@ -677,13 +668,11 @@
             </div>
         </section>
         
+        <!-- 专业技能 -->
         <section id="skills">
-            <!-- 已替换为齿轮组图标 -->
-            <h2><i class="fas fa-cogs"></i> 专业技能</h2>
-            <div class="skills-container">
-
-                <div class="skill-category">
-                    <!-- 替换为层叠图标，代表薄膜沉积与微纳加工，避免与芯片图标重复 -->
+            <h2 class="section-title"><i class="fas fa-cogs"></i> 专业技能</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
                     <h3><i class="fas fa-layer-group"></i> 器件制备与微纳加工</h3>
                     <ul>
                         <li>掌握半导体薄膜沉积技术（CVD、ALD、磁控溅射、旋涂法等）</li>
@@ -693,7 +682,7 @@
                     </ul>
                 </div>
                 
-                <div class="skill-category">
+                <div class="skill-card">
                     <h3><i class="fas fa-microscope"></i> 光电测试与材料表征</h3>
                     <ul>
                         <li>熟练使用半导体参数测试仪（Keithley 4200/2450、Agilent B1500等）及探针台</li>
@@ -703,7 +692,7 @@
                     </ul>
                 </div>
                 
-                <div class="skill-category">
+                <div class="skill-card">
                     <h3><i class="fas fa-brain"></i> 突触特性与神经形态计算</h3>
                     <ul>
                         <li>深入理解生物突触机制，熟练测试及分析EPSC/IPSC、PPF、STDP等突触可塑性参数</li>
@@ -713,7 +702,7 @@
                     </ul>
                 </div>
                 
-                <div class="skill-category">
+                <div class="skill-card">
                     <h3><i class="fas fa-chart-line"></i> 仿真建模与数据分析</h3>
                     <ul>
                         <li>精通 Origin 进行专业的科研数据处理与高质量期刊图表绘制</li>
@@ -723,7 +712,7 @@
                     </ul>
                 </div>
                 
-                <div class="skill-category">
+                <div class="skill-card">
                     <h3><i class="fas fa-microchip"></i> 嵌入式开发</h3>
                     <ul>
                         <li>精通STM32系列单片机开发（F1/F4系列）</li>
@@ -735,7 +724,7 @@
                     </ul>
                 </div>
                 
-                <div class="skill-category">
+                <div class="skill-card">
                     <h3><i class="fas fa-laptop-code"></i> 编程语言</h3>
                     <ul>
                         <li>Python（NumPy/Pandas/Matplotlib数据处理）</li>
@@ -746,8 +735,8 @@
                     </ul>
                 </div>
                 
-                <div class="skill-category">
-                    <h3><i class="fas fa-brain"></i> AI与信号处理</h3>
+                <div class="skill-card">
+                    <h3><i class="fas fa-network-wired"></i> AI与信号处理</h3>
                     <ul>
                         <li>掌握机器学习算法（SVM、随机森林、神经网络）</li>
                         <li>熟悉OpenCV图像处理技术</li>
@@ -757,7 +746,7 @@
                     </ul>
                 </div>
                 
-                <div class="skill-category">
+                <div class="skill-card">
                     <h3><i class="fas fa-tools"></i> 开发工具</h3>
                     <ul>
                         <li>MATLAB/Simulink系统建模与仿真</li>
@@ -771,12 +760,13 @@
             </div>
         </section>
         
+        <!-- 项目经验 -->
         <section id="experience">
-            <h2><i class="fas fa-briefcase"></i> 项目经验</h2>
+            <h2 class="section-title"><i class="fas fa-briefcase"></i> 项目经验</h2>
 
             <div class="project">
                 <h3>基于 Sc₂O₃/Ga₂O₃ 异质结的耐高温深紫外自适应光电突触研究（核心课题）</h3>
-                <p><strong>时间：</strong> 2025年9月 ~ 至今</p>
+                <div class="project-meta">时间：2025年9月 ~ 至今</div>
                 <ul>
                     <li>器件设计与微纳加工：设计并制备基于氧化钪/氧化镓异质结的光电突触器件。熟练掌握薄膜沉积、光刻工艺以及电子束蒸发（E-beam）等微纳加工技术，实现高质量异质界面的构建与电极制备。</li>
                     <li>极端环境光电表征：搭建并优化高温及深紫外光电测试系统，系统性探究器件在高温恶劣环境下的深紫外光电响应特性、暗电流抑制表现及长期稳定性。</li>
@@ -787,7 +777,7 @@
 
             <div class="project">
                 <h3>AI训练数据准备（实习项目）</h3>
-                <p><strong>时间：</strong> 2025年6月 ~ 2025年8月</p>
+                <div class="project-meta">时间：2025年6月 ~ 2025年8月</div>
                 <ul>
                     <li>参与构建10万+条语音指令数据集，覆盖20个场景类别</li>
                     <li>开发Python脚本自动化处理音频数据（降噪、标准化、分段）</li>
@@ -799,7 +789,7 @@
             
             <div class="project">
                 <h3>基于STM32的智能家居安防系统（毕业设计）</h3>
-                <p><strong>时间：</strong> 2025年3月 ~ 2025年5月</p>
+                <div class="project-meta">时间：2025年3月 ~ 2025年5月</div>
                 <ul>
                     <li>设计并实现以STM32单片机为核心的智能安防系统，集成燃气监测、火灾预警、入侵检测及人脸识别功能</li>
                     <li>采用多传感器数据融合技术提高系统可靠性，通过卡尔曼滤波算法优化传感器数据</li>
@@ -811,7 +801,7 @@
             
             <div class="project">
                 <h3>STM32F407物联网网关开发（实习项目）</h3>
-                <p><strong>时间：</strong> 2024年12月 ~ 2025年1月</p>
+                <div class="project-meta">时间：2024年12月 ~ 2025年1月</div>
                 <ul>
                     <li>负责ADC高精度采样模块开发（16位精度，采样率1kHz）</li>
                     <li>实现PWM控制模块，支持多通道精确输出</li>
@@ -820,52 +810,52 @@
                     <li>使用STM32CubeMX配置硬件外设，提高开发效率30%</li>
                 </ul>
             </div>
-            
         </section>
         
+        <!-- 联系方式 -->
         <section id="contact">
-            <h2><i class="fas fa-envelope"></i> 联系方式</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope contact-icon"></i>
-                    <!-- 修复了多余的 </a> 标签 -->
-                    <span>邮箱：liuteam14@gmail.com</span>
+            <h2 class="section-title"><i class="fas fa-envelope"></i> 联系方式</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <strong>邮箱</strong>
+                    <span>liuteam14@gmail.com</span>
                 </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone contact-icon"></i>
-                    <span>电话：15055956280</span>
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <strong>电话</strong>
+                    <span>15055956280</span>
                 </div>
-                <div class="contact-item">
-                    <i class="fas fa-qq contact-icon"></i>
-                    <span>QQ: 908965922</span>
+                <div class="contact-card">
+                    <i class="fab fa-qq"></i>
+                    <strong>QQ</strong>
+                    <span>908965922</span>
                 </div>
             </div>
             
-            <div class="social-links">
-                <a href="https://github.com/" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://weixin.qq.com/" class="social-link" title="微信"><i class="fab fa-weixin"></i></a>
-                <a href="https://x.com/" class="social-link" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.blogger.com/" class="social-link" title="博客"><i class="fas fa-blog"></i></a>
+            <div class="social-bar">
+                <a href="https://github.com/" class="social-btn" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/" class="social-btn" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://weixin.qq.com/" class="social-btn" title="微信"><i class="fab fa-weixin"></i></a>
+                <a href="https://x.com/" class="social-btn" target="_blank" title="Twitter/X"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.blogger.com/" class="social-btn" title="博客"><i class="fas fa-blog"></i></a>
             </div>
             
-            <div style="text-align: center; margin-top: 30px;">
-                <p>欢迎联系我讨论技术问题或职业机会！</p>
+            <div style="text-align: center; margin-top: 30px; color: var(--text-muted);">
+                <p style="margin-bottom: 5px;">欢迎联系我讨论技术问题或职业机会！</p>
                 <p>工作日通常会在24小时内回复您的消息。</p>
             </div>
         </section>
     </div>
     
     <footer>
-        <div class="container">
-            <p>&copy; 2026 awei的个人主页. 保留所有权利.</p>
-            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
-                <span>最后更新: 2026年10月</span>
-                <span style="margin: 0 10px;">|</span>
-                <!-- 这里的桃心颜色由原本的固定红改为了与当前色调更配的暖橙色点缀 -->
-                <span>Made with <i class="fas fa-heart" style="color: var(--accent-color);"></i> in Hefei</span>
-            </p>
-        </div>
+        <p>&copy; 2026 awei的个人主页. 保留所有权利.</p>
+        <p style="margin-top: 10px;">
+            <span>最后更新: 2026年10月</span>
+            <span style="margin: 0 10px; opacity: 0.5;">|</span>
+            <span>Made with <i class="fas fa-heart"></i> in Hefei</span>
+        </p>
     </footer>
 </body>
 </html>
